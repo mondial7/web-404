@@ -1,3 +1,3 @@
 module.exports = {
-  address: 'mongodb://localhost:27017/mongo-test',
+  address: 'mongodb://mongo:27017/light-app',
 };
