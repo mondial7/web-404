@@ -1,23 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
+const statuses = ['on', 'off']
+
 function App() {
+  
+  const [lightsList, setLightsList] = useState([])
+  const fetchLights = async () => {
+    const { lights } = await fetch('http://localhost:3000/')
+      .then(res => res.json())
+    setLightsList(lights)
+  }
+  useEffect(() => {
+    fetchLights()
+  }, [])
+  const lightSwitch = ({ status }) => {
+    return async () => {
+      const nextStatus = statuses[1-statuses.indexOf(status)]
+      const switched = await fetch(`http://localhost:3000/light/${nextStatus}`)
+        .then(res => res.json())
+      if (switched) {
+        fetchLights()
+      }
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      {lightsList.length > 0 && lightsList.map((light) => (<>
+          <div
+            className={`Light ${light.status}`}
+          ></div>
+          <p
+            className="Light-label"
+            onClick={lightSwitch(light)}>{light.name} ~ {light.status}</p>
+          <p>Clicks ~ {light.clicks}</p>
+      </>))}
       </header>
     </div>
   );

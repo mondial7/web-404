@@ -2,14 +2,30 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+.Light {
+  transition: all 250ms;
+  height: 50vmin;
+  width: 50vmin;
+  border-radius: 40%;
   pointer-events: none;
 }
 
+.Light.on {
+  background-color: yellowgreen;
+}
+
+.Light.off {
+  background-color: transparent;
+}
+
+.Light-label {
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .Light {
+    animation: App-logo-spin infinite 15s linear;
   }
 }
 
@@ -22,10 +38,6 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {
