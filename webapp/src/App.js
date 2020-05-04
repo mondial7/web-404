@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 
+const apiHost = 'http://localhost:3000'
 const statuses = ['on', 'off']
 
 function App() {
   
   const [lightsList, setLightsList] = useState([])
   const fetchLights = async () => {
-    const { lights } = await fetch('http://localhost:3000/')
+    const { lights } = await fetch(`${apiHost}/`)
       .then(res => res.json())
     setLightsList(lights)
   }
@@ -17,7 +18,7 @@ function App() {
   const lightSwitch = ({ status }) => {
     return async () => {
       const nextStatus = statuses[1-statuses.indexOf(status)]
-      const switched = await fetch(`http://localhost:3000/light/${nextStatus}`)
+      const switched = await fetch(`${apiHost}/light/${nextStatus}`)
         .then(res => res.json())
       if (switched) {
         fetchLights()
