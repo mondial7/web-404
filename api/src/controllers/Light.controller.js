@@ -20,25 +20,34 @@ const updateStatus = async (status) => {
   })
 }
 
-LightController.stats = async (req, res) => {
-  try{
-    await LightModel.find().sort('-dateAdded').exec((err, lights) => {
-      if (err) {
-        res.status(500).send(err)
-      } else {
-        res.json({ lights })
-      }
-    })
-  } catch(err) {
+LightController.update = async (req, res) => {
+  try {
+    await updateStatus(req.params.status)
+    res.status(200).json(true)
+  } catch (err) {
     res.send(err)
   }
 }
 
-LightController.update = async (req, res) => {
-  try{
-    await updateStatus(req.params.status)
-    res.status(200)
-  } catch(err) {
+LightController.stats = async (req, res) => {
+  try {
+    const lights = await LightModel.find()
+    res.json({ lights })
+  } catch (err) {
+    res.send(err)
+  }
+}
+
+/**
+ * Note: currently using a single light on this demo app
+ */
+LightController.reset = async (req, res) => {
+  const name = 'BedroomLight'
+  try {
+    await LightModel.findOne({ name }).remove()
+    await new LightModel({ name }).save()
+    res.status(200).json(true)
+  } catch (err) {
     res.send(err)
   }
 }

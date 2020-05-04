@@ -4,7 +4,6 @@ module.exports = mongoose.model('Light', new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    default: 'BedroomLight',
     unique: true,
   },
   status: {
