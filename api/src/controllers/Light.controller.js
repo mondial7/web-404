@@ -42,7 +42,7 @@ LightController.stats = async (req, res) => {
  * Note: currently using a single light on this demo app
  */
 LightController.reset = async (req, res) => {
-  const name = 'BedroomLight'
+  const name = DEFAULT_LIGHT
   try {
     await LightModel.findOne({ name }).remove()
     await new LightModel({ name }).save()
