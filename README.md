@@ -1,3 +1,3 @@
 # LIGHT & DARK SIDE
 
-The application has been split into a client-side web application and into a backend APIs service.
+The application has been split into a SPA and an APIs service.
