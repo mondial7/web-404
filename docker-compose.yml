@@ -1,0 +1,25 @@
+version: "3"
+services:
+  api:
+    container_name: light-app-api
+    restart: always
+    build: ./api
+    ports:
+      - 3000:3000
+    links:
+      - mongo
+  mongo:
+    container_name: light-app-mongo
+    image: mongo
+    volumes:
+      - mongodata:/data/db
+    ports:
+      - 27017:27017
+  webapp:
+    container_name: light-app-webapp
+    restart: always
+    build: ./webapp
+    ports:
+      - 5000:5000
+volumes:
+  mongodata:
