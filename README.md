@@ -1,5 +1,14 @@
 # LIGHT & DARK SIDE
 
+Build a web application emulating a light switcher.
+
+## Stack
+
+Frontend: Vue
+Backend / APIs: Mongo & Node (Legacy)
+
+## Implementation
+
 The application has been split into a SPA and an APIs service.
 
 Build project with `docker-compose`
